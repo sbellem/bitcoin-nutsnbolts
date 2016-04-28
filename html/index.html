@@ -1,0 +1,1013 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bitcoin: Some Nuts &amp; Bolts &mdash; Bitcoin: Some Nuts and Bolts 2016.03.27 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.03.27',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Bitcoin: Some Nuts and Bolts 2016.03.27 documentation" href="#" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bitcoin-some-nuts-bolts">
+<h1>Bitcoin: Some Nuts &amp; Bolts<a class="headerlink" href="#bitcoin-some-nuts-bolts" title="Permalink to this headline">¶</a></h1>
+<p><strong>PyData &#64; EyeQuant</strong></p>
+<p><strong>April 2016, Berlin</strong></p>
+<p><strong>sylvain&#64;ascribe.io</strong></p>
+<div class="section" id="thanks">
+<h2>Thanks<a class="headerlink" href="#thanks" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>EyeQuant</li>
+<li>PyData</li>
+<li>To you, the audience</li>
+</ul>
+</div>
+<div class="section" id="whoami">
+<h2><code class="docutils literal"><span class="pre">whoami</span></code><a class="headerlink" href="#whoami" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Sylvain Bellemare, <a class="reference external" href="https://twitter.com/sbellem">&#64;sbellem</a></li>
+<li>Software engineer working at <a class="reference external" href="https://www.ascribe.io">ascribe</a></li>
+<li>Work on <code class="docutils literal"><span class="pre">django/rest_framework</span></code> -based API</li>
+<li>Previously worked with <code class="docutils literal"><span class="pre">elasticsearch</span></code> &amp; <code class="docutils literal"><span class="pre">django</span></code></li>
+</ul>
+</div>
+<div class="section" id="a-few-words-about-ascribe">
+<h2>A few words about ascribe<a class="headerlink" href="#a-few-words-about-ascribe" title="Permalink to this headline">¶</a></h2>
+<ul class="build">
+<li><p class="first">Circa 2014</p>
+</li>
+<li><dl class="first docutils">
+<dt>Intellectual Property on the Blockchain:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/ascribe/spool">SPOOL blockchain protocol</a></li>
+<li><a class="reference external" href="https://www.ascribe.io/docs/">SPOOL API</a></li>
+<li><a class="reference external" href="https://www.ascribe.io">ascribe.io</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Trace how images spread on the Internet over time:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://www.whereonthe.net/">whereonthe.net</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>A scalable blockchain database:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://www.bigchaindb.com/">BigchainDB</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="36%" />
+<col width="27%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><img alt="_images/favicon-96x96.png" class="first last" src="_images/favicon-96x96.png" />
+</td>
+<td><a class="first last reference internal image-reference" href="_images/whereonthenet.png"><img alt="_images/whereonthenet.png" src="_images/whereonthenet.png" style="width: 119.0px; height: 96.60000000000001px;" /></a>
+</td>
+<td><img alt="_images/bdb.png" class="first last" src="_images/bdb.png" />
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Secure Public Online Ownership Ledger</p>
+</div>
+</div>
+<div class="section" id="ascribe-white-papers">
+<h2>ascribe &amp; white papers<a class="headerlink" href="#ascribe-white-papers" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li><a class="reference external" href="https://d1qjsxua1o9x03.cloudfront.net/live/trent&#64;ascribe.io/ascribe%20whitepaper%2020150624/digitalwork/ascribe%20whitepaper%2020150624.pdf">Towards An Ownership Layer for the Internet</a></li>
+<li><a class="reference external" href="https://www.bigchaindb.com/whitepaper/">BigchainDB: A Scalable Blockchain Database</a></li>
+</ul>
+</div>
+<div class="section" id="ascribe-open-source-software">
+<h2>ascribe &amp; open source software<a class="headerlink" href="#ascribe-open-source-software" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li><a class="reference external" href="https://github.com/ascribe/transactions">transactions</a>: Bitcoin for humans</li>
+<li><a class="reference external" href="https://github.com/ascribe/pyspool">pyspool</a>: Reference implementation of the SPOOL protocol</li>
+<li><a class="reference external" href="https://github.com/ascribe/image-match">image-match</a>: Quickly search over billions of images</li>
+<li><a class="reference external" href="https://github.com/bigchaindb/bigchaindb">bigchaindb</a>: A scalable blockchain database</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/cryptoconditions">cryptoconditions</a>: Python port of the <a class="reference external" href="https://interledger.org/five-bells-condition/spec.html">Interledger Protocol specifications</a></li>
+</ul>
+<img src="_images/python-powered-w.svg" /></div>
+<div class="section" id="talk-outline">
+<h2>Talk Outline<a class="headerlink" href="#talk-outline" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Cryptographic primitives</li>
+<li>Bitcoin transactions</li>
+<li>Bitcoin blocks</li>
+<li>Bitcoin blockchain</li>
+<li>Bitcoin network and consensus</li>
+<li>Brief demo of ascribe</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Brief mention of cryptographic primitives (hash functions &amp; digital
+signatures) to simply point out their key role in bitcoin. But the talk
+assumes familiarity with each primitive.</p>
+<p>Brief mention of public keys, and how they are used to represent senders
+and receivers in bitcoin, through what is called bitcoin addresses. Again,
+assumption of familiarity with public key cryptography.</p>
+<p>Start with a bitcoin transaction, its data structure, validation via a
+script, but only cover the digital signature validation, and perhaps
+briefly mention that the script could be used for basic smart contracts.</p>
+<p>Look at how transactions are assembled into blocks. Show the data
+structure of a block. This will be an occasion to introduce Merkle trees,
+in the context of a block.</p>
+<p>Brief discussion of the role of the nonce, and other related fields, with
+respect to the hash puzzle that needs to be solved.</p>
+<p>Briefly show how the blocks are chained, to form the block chain.</p>
+<p class="last">Bitcoin netowrk &#8211; perhaps terminate with a brief mention of the challenge
+of achieving consensus on what the block chain actually is since each node
+may have its own version.</p>
+</div>
+</div>
+<div class="section" id="warnings">
+<h2>Warnings<a class="headerlink" href="#warnings" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li><strong>Some</strong> Nuts &amp; Bolts</li>
+<li>The problem of not understanding everything</li>
+<li>The problem of not knowing where to start</li>
+</ul>
+</div>
+<div class="section" id="richard-feynman-the-feeling-of-confusion">
+<h2>Richard Feynman: the feeling of confusion<a class="headerlink" href="#richard-feynman-the-feeling-of-confusion" title="Permalink to this headline">¶</a></h2>
+<iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/lytxafTXg6c?rel=0" frameborder="0" allowfullscreen></iframe></div>
+<div class="section" id="feynman-greek-vs-babylonian-mathematics">
+<h2>Feynman: &#8216;Greek&#8217; vs &#8216;Babylonian&#8217; mathematics<a class="headerlink" href="#feynman-greek-vs-babylonian-mathematics" title="Permalink to this headline">¶</a></h2>
+<iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/YaUlqXRPMmY?rel=0" frameborder="0" allowfullscreen></iframe></div>
+<div class="section" id="bitcoin-origins">
+<h2>Bitcoin Origins<a class="headerlink" href="#bitcoin-origins" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Satoshi Nakamoto paper: <a class="reference external" href="https://bitcoin.org/bitcoin.pdf">Bitcoin: A Peer-to-Peer Electronic Cash System</a></li>
+</ul>
+<div class="figure" id="id6">
+<img alt="_images/the_hunt_for_satoshi_nakamoto.png" src="_images/the_hunt_for_satoshi_nakamoto.png" />
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://www.bitcoincomic.org/blog/hunt-for-satoshi-nakamoto-bitcoin-comic-gets-funded-available-soon/">The Hunt For Satoshi Nakamoto</a> by <a class="reference external" href="https://www.bitcoincomic.org/blog/author/alexpreukschat/">Alex Preukschat</a> (usage granted by the author)</span></p>
+</div>
+</div>
+<div class="section" id="bitcoin-key-points">
+<h2>Bitcoin Key Points<a class="headerlink" href="#bitcoin-key-points" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Bitcoin is a decentralized payment system.</li>
+<li>Based on a public transaction ledger.</li>
+<li>The ledger is maintained by anonymous miners.</li>
+<li>Miners validate transactions, and generate blocks of transactions.</li>
+<li>For each block, miiners include a coin creation transaction, for
+which they select the recipient of the newly minted coins.</li>
+<li>A valid block must include a nonce.</li>
+<li>To find a valid nonce, a miner must brute-force a hash inequality.</li>
+<li>Bitcoin mining with the block rewards &amp; transaction fees create an incentive
+for miners to behave honestly, which in turn helps maintaining the intergity
+of the blockchain.</li>
+<li>Garay et al. <a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a>:</li>
+</ul>
+</div>
+<div class="section" id="cryptographic-primitives">
+<h2>Cryptographic Primitives<a class="headerlink" href="#cryptographic-primitives" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Hash functions</li>
+<li>Digital signatures</li>
+</ul>
+</div>
+<div class="section" id="secure-hash-algorithm-sha-256">
+<h2>Secure Hash Algorithm - SHA-256<a class="headerlink" href="#secure-hash-algorithm-sha-256" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/Merkle-damgard.png"><img alt="_images/Merkle-damgard.png" src="_images/Merkle-damgard.png" style="width: 840.0px; height: 226.79999999999998px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/File:Merkle-damgard.png">Merkle-Damgård hash construction</a>
+by <a class="reference external" href="https://en.wikipedia.org/wiki/User:Matt_Crypto">Matt Crypto</a> (public domain)</p>
+<p>&#8220;SHA‐256 uses the Merkle‐Damgard transform to turn a fixed‐length
+collision‐resistant compression function into a hash function that accepts
+arbitrary‐length inputs. The input is “padded” so that its length is a multiple
+of 512 bits.&#8221; (<a class="reference external" href="https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf">Narayanan et al.</a>)</p>
+</div>
+<div class="section" id="daviesmeyer-one-way-compression-function">
+<h2>Davies–Meyer one-way compression function<a class="headerlink" href="#daviesmeyer-one-way-compression-function" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img src="_images/350px-Davies-Meyer_hash.svg" /></div>
+<p><a class="reference external" href="https://commons.wikimedia.org/wiki/File%3ADavies-Meyer_hash.svg">Davies-Meyer hash construct</a>
+that turns a block cipher into a one-way compression function that can be used
+inside a hash function.</p>
+<p>by <a class="reference external" href="https://commons.wikimedia.org/wiki/User:Davidgothberg">David Göthberg</a> (public domain)</p>
+</div>
+<div class="section" id="elliptic-curve-digital-signature-algorithm-ecdsa">
+<h2>Elliptic Curve Digital Signature Algorithm (ECDSA)<a class="headerlink" href="#elliptic-curve-digital-signature-algorithm-ecdsa" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/Secp256k1.png"><img alt="_images/Secp256k1.png" src="_images/Secp256k1.png" style="width: 390.0px; height: 390.0px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><a class="reference external" href="https://en.bitcoin.it/wiki/File:Secp256k1.png">secp256k1&#8217;s elliptic curve y^2 = x^3 + 7 over the real numbers</a></p>
+<p>by <a class="reference external" href="https://en.bitcoin.it/wiki/User:Theymos">Theymos</a> (public domain)</p>
+</div>
+<div class="section" id="alice-bob">
+<h2>Alice &amp; Bob<a class="headerlink" href="#alice-bob" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/alice-bob-tx.jpeg"><img alt="_images/alice-bob-tx.jpeg" src="_images/alice-bob-tx.jpeg" style="width: 645.12px; height: 483.84000000000003px;" /></a>
+</div>
+</div>
+<div class="section" id="python-bitcoin">
+<h2>Python &amp; Bitcoin<a class="headerlink" href="#python-bitcoin" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">pycoin</span></code>:</dt>
+<dd><ul class="first last simple">
+<li>Bitcoin and alt-coin utility library. &#8211; &#64;richardkiss</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">pybitcointools</span></code>:</dt>
+<dd><ul class="first last simple">
+<li>Common-sense Bitcoin-themed Python ECC library. &#8211; &#64;vbuterin</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">python-bitcoinlib</span></code>:</dt>
+<dd><ul class="first last simple">
+<li>Bitcoin library. &#8211; &#64;petertodd</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">transactions</span></code>:</dt>
+<dd><ul class="first simple">
+<li>Library to easily create, sign, and push bitcoin transactions. &#8211; &#64;ascribe</li>
+</ul>
+<p class="last">&#8212;</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">For this talk:</p>
+<blockquote>
+<div><ul>
+<li><div class="first highlight-bash"><div class="highlight"><pre><span></span>$ pip install pycoin transactions
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="alice-address-creation-with-pycoin">
+<h2>Alice: address creation with pycoin<a class="headerlink" href="#alice-address-creation-with-pycoin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pycoin.key.BIP32Node</span> <span class="kn">import</span> <span class="n">BIP32Node</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alice_master_secret</span> <span class="o">=</span> <span class="s1">&#39;alice-super-duper-mega-top-secret&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alice_wallet</span> <span class="o">=</span> <span class="n">BIP32Node</span><span class="o">.</span><span class="n">from_master_secret</span><span class="p">(</span><span class="n">alice_master_secret</span><span class="p">,</span> <span class="n">netcode</span><span class="o">=</span><span class="s1">&#39;XTN&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alice</span> <span class="o">=</span> <span class="n">alice_wallet</span><span class="o">.</span><span class="n">bitcoin_address</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alice</span>
+<span class="go">u&#39;mp2YPeFdPufm515qWbmPXzSACxnMVdphnF&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="alice-view-in-blockchain-explorer">
+<h2>Alice: view in blockchain explorer<a class="headerlink" href="#alice-view-in-blockchain-explorer" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id7">
+<img alt="_images/alice.png" src="_images/alice.png" />
+<p class="caption"><span class="caption-text">blocktrail.com/tBTC/address/mp2YPeFdPufm515qWbmPXzSACxnMVdphnF</span></p>
+</div>
+</div>
+<div class="section" id="bob-address-creation-with-pycoin">
+<h2>Bob: address creation with pycoin<a class="headerlink" href="#bob-address-creation-with-pycoin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pycoin.key.BIP32Node</span> <span class="kn">import</span> <span class="n">BIP32Node</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bob_wallet</span> <span class="o">=</span> <span class="n">BIP32Node</span><span class="o">.</span><span class="n">from_master_secret</span><span class="p">(</span><span class="s1">&#39;bob-master-secret&#39;</span><span class="p">,</span> <span class="n">netcode</span><span class="o">=</span><span class="s1">&#39;XTN&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bob</span> <span class="o">=</span> <span class="n">bob_wallet</span><span class="o">.</span><span class="n">bitcoin_address</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bob</span>
+<span class="go">u&#39;n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bob-view-in-blockchain-explorer">
+<h2>Bob: view in blockchain explorer<a class="headerlink" href="#bob-view-in-blockchain-explorer" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id8">
+<img alt="_images/bob.png" src="_images/bob.png" />
+<p class="caption"><span class="caption-text">blocktrail.com/tBTC/address/n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr</span></p>
+</div>
+</div>
+<div class="section" id="alice-bob-view-balances">
+<h2>Alice &amp; Bob &#8211; view balances<a class="headerlink" href="#alice-bob-view-balances" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions.services.blockrservice</span> <span class="kn">import</span> <span class="n">BitcoinBlockrService</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blockr</span> <span class="o">=</span> <span class="n">BitcoinBlockrService</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alice</span><span class="p">,</span> <span class="n">bob</span>
+<span class="go"> (u&#39;mp2YPeFdPufm515qWbmPXzSACxnMVdphnF&#39;, u&#39;n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr&#39;)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blockr</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">alice</span><span class="p">)</span>
+<span class="go">{u&#39;address&#39;: u&#39;mp2YPeFdPufm515qWbmPXzSACxnMVdphnF&#39;,</span>
+<span class="go"> u&#39;balance&#39;: 1.22,</span>
+<span class="go"> u&#39;balance_multisig&#39;: 0}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blockr</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(</span><span class="n">bob</span><span class="p">)</span>
+<span class="go">{u&#39;address&#39;: u&#39;n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr&#39;,</span>
+<span class="go"> u&#39;balance&#39;: 0,</span>
+<span class="go"> u&#39;balance_multisig&#39;: 0}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="alice-sends-10000-satoshis-to-bob">
+<h2>Alice sends 10000 satoshis to Bob<a class="headerlink" href="#alice-sends-10000-satoshis-to-bob" title="Permalink to this headline">¶</a></h2>
+<p class="build">Three steps by Alice:</p>
+<ul class="simple">
+<li>Transaction creation</li>
+<li>Transaction signature</li>
+<li>Transaction broadcast</li>
+</ul>
+<p>Multiple steps required by the Bitcoin miners:</p>
+<ul class="simple">
+<li>Transaction validation</li>
+<li>Transaction relay to connected peers</li>
+<li>Block generation (brute-foce hash inequality &amp; group valid transactions)</li>
+<li>Block broadcast</li>
+<li>Block validation</li>
+<li>Block chaining</li>
+</ul>
+</div>
+<div class="section" id="transaction-creation">
+<h2>Transaction Creation<a class="headerlink" href="#transaction-creation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions</span> <span class="kn">import</span> <span class="n">Transactions</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+<span class="go">(&#39;01000000014f2d34b5c41cfc34ffba6811280297cd3a45fdc4a982bd137219170e34d8a9950100000000&#39;</span>
+<span class="go"> &#39;ffffffff0210270000000000001976a914ff141b97e1bd38ccbafd72fdaed88b34d62337f588ac00e5b9&#39;</span>
+<span class="go"> &#39;01000000001976a9145d5988080ddb72dcb365755fbc1ea46bbee7628788ac00000000&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transaction-signature">
+<h2>Transaction Signature<a class="headerlink" href="#transaction-signature" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions</span> <span class="kn">import</span> <span class="n">Transactions</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">alice_master_secret</span><span class="p">)</span>
+<span class="go">(&#39;01000000014f2d34b5c41cfc34ffba6811280297cd3a45fdc4a982bd137219170e34d8a995010000006b&#39;</span>
+<span class="go"> &#39;483045022100f52d33589ac95fda263d35a694dffcc9626d4c371a3140c020cf22956adc9e14022073c8&#39;</span>
+<span class="go"> &#39;33d254a13620ff0b4d9e0f8c52643962f1cdc7d684cbacf1a82692cee1ed01210256e335d68d2f4f9561&#39;</span>
+<span class="go"> &#39;985fb061a5c36ff9510b73005cf81e2f7a26e7bce0d8ceffffffff0210270000000000001976a914ff14&#39;</span>
+<span class="go"> &#39;1b97e1bd38ccbafd72fdaed88b34d62337f588ac00e5b901000000001976a9145d5988080ddb72dcb365&#39;</span>
+<span class="go"> &#39;755fbc1ea46bbee7628788ac00000000&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transaction-broadcast">
+<h2>Transaction Broadcast<a class="headerlink" href="#transaction-broadcast" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions</span> <span class="kn">import</span> <span class="n">Transactions</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">alice_master_secret</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+<span class="go">2a77690c8d6d4eb8c49653ce8052fdea903328c095289eb389b6aad760ce6fcd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoded-signed-transaction">
+<h2>Decoded Signed Transaction<a class="headerlink" href="#decoded-signed-transaction" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions</span> <span class="kn">import</span> <span class="n">Transactions</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">alice_master_secret</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">[u&#39;statistics&#39;, u&#39;tx&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">]</span>
+<span class="go">{u&#39;fee&#39;: u&#39;0.00030000&#39;,</span>
+<span class="go"> u&#39;vins_sum&#39;: u&#39;0.29000000&#39;,</span>
+<span class="go"> u&#39;vouts_sum&#39;: u&#39;0.28970000&#39;}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoded-signed-tx-tx">
+<h2><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']</span></code><a class="headerlink" href="#decoded-signed-tx-tx" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span><span class="p">[</span><span class="s1">&#39;tx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">[u&#39;vout&#39;, u&#39;vin&#39;, u&#39;txid&#39;, u&#39;version&#39;, u&#39;locktime&#39;, u&#39;size&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">decoded_signed_tx</span><span class="p">[</span><span class="s1">&#39;tx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span>
+<span class="go">      if k in (&#39;txid&#39;, &#39;version&#39;, &#39;locktime&#39;, &#39;size&#39;)}</span>
+<span class="go">{u&#39;locktime&#39;: 0,</span>
+<span class="go"> u&#39;size&#39;: 119,</span>
+<span class="go"> u&#39;txid&#39;: u&#39;f13611e756b4d6dcf167b26db33cbb9241bbc79971cf3331a1ba11c782fa5bdb&#39;,</span>
+<span class="go"> u&#39;version&#39;: 1}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoded-signed-tx-tx-vin">
+<h2><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']['vin']</span></code><a class="headerlink" href="#decoded-signed-tx-tx-vin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span><span class="p">[</span><span class="s1">&#39;tx&#39;</span><span class="p">][</span><span class="s1">&#39;vin&#39;</span><span class="p">]</span>
+<span class="go">[{u&#39;scriptSig&#39;: {u&#39;asm&#39;: u&#39;&#39;, u&#39;hex&#39;: u&#39;&#39;},</span>
+<span class="go">  u&#39;sequence&#39;: 4294967295,</span>
+<span class="go">  u&#39;txid&#39;: u&#39;95a9d8340e17197213bd82a9c4fd453acd9702281168baff34fc1cc4b5342d4f&#39;,</span>
+<span class="go">  u&#39;vout&#39;: 1}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoded-signed-tx-tx-vout">
+<h2><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']['vout']</span></code><a class="headerlink" href="#decoded-signed-tx-tx-vout" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decoded_signed_tx</span><span class="p">[</span><span class="s1">&#39;tx&#39;</span><span class="p">][</span><span class="s1">&#39;vout&#39;</span><span class="p">]</span>
+<span class="go">[{u&#39;n&#39;: 0,</span>
+<span class="go">  u&#39;scriptPubKey&#39;: {u&#39;addresses&#39;: [u&#39;n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr&#39;],</span>
+<span class="go">   u&#39;asm&#39;: (&#39;OP_DUP OP_HASH160 ff141b97e1bd38ccbafd72fdaed88b34d62337f5&#39;</span>
+<span class="go">             &#39; OP_EQUALVERIFY OP_CHECKSIaG&#39;),</span>
+<span class="go">   u&#39;hex&#39;: u&#39;76a914ff141b97e1bd38ccbafd72fdaed88b34d62337f588ac&#39;,</span>
+<span class="go">   u&#39;reqSigs&#39;: 1,</span>
+<span class="go">   u&#39;type&#39;: u&#39;pubkeyhash&#39;},</span>
+<span class="go">  u&#39;value&#39;: 0.0001},</span>
+<span class="go"> {u&#39;n&#39;: 1,</span>
+<span class="go">  u&#39;scriptPubKey&#39;: {u&#39;addresses&#39;: [u&#39;mp2YPeFdPufm515qWbmPXzSACxnMVdphnF&#39;],</span>
+<span class="go">   u&#39;asm&#39;: (&#39;OP_DUP OP_HASH160 5d5988080ddb72dcb365755fbc1ea46bbee76287&#39;</span>
+<span class="go">            &#39; OP_EQUALVERIFY OP_CHECKSIG&#39;),</span>
+<span class="go">   u&#39;hex&#39;: u&#39;76a9145d5988080ddb72dcb365755fbc1ea46bbee7628788ac&#39;,</span>
+<span class="go">   u&#39;reqSigs&#39;: 1,</span>
+<span class="go">   u&#39;type&#39;: u&#39;pubkeyhash&#39;},</span>
+<span class="go">  u&#39;value&#39;: 0.2896}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-transaction">
+<h2>Get Transaction<a class="headerlink" href="#get-transaction" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transactions</span> <span class="kn">import</span> <span class="n">Transactions</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">(</span><span class="n">testnet</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">alice</span><span class="p">,</span> <span class="p">(</span><span class="n">bob</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">alice_master_secret</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">htx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">htx</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">{u&#39;block&#39;: 787057,</span>
+<span class="go"> u&#39;confirmations&#39;: 12,</span>
+<span class="go"> u&#39;days_destroyed&#39;: u&#39;0.10&#39;,</span>
+<span class="go"> u&#39;extras&#39;: None,</span>
+<span class="go"> u&#39;fee&#39;: u&#39;0.00030000&#39;,</span>
+<span class="go"> u&#39;is_coinbased&#39;: 0,</span>
+<span class="go"> u&#39;is_unconfirmed&#39;: False,</span>
+<span class="go"> u&#39;time_utc&#39;: u&#39;2016-04-19T21:06:02Z&#39;,</span>
+<span class="go"> u&#39;trade&#39;: {u&#39;vins&#39;: [{u&#39;address&#39;: u&#39;mp2YPeFdPufm515qWbmPXzSACxnMVdphnF&#39;,</span>
+<span class="go"> ...</span>
+<span class="go"> ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bitcoin-block">
+<h2>Bitcoin Block<a class="headerlink" href="#bitcoin-block" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tx</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">htx</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">block_height</span> <span class="o">=</span> <span class="n">tx</span><span class="p">[</span><span class="s1">&#39;block&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">get_block_raw</span><span class="p">(</span><span class="n">block_height</span><span class="p">)</span>
+<span class="go">{u&#39;bits&#39;: u&#39;1a072a74&#39;,</span>
+<span class="go"> u&#39;chainwork&#39;: u&#39;00000000000000000000000000000000000000000000000a1ef0e0907356e3b0&#39;,</span>
+<span class="go"> u&#39;confirmations&#39;: 15,</span>
+<span class="go"> u&#39;difficulty&#39;: 2341243.6662834,</span>
+<span class="go"> u&#39;hash&#39;: u&#39;00000000000003970a9fdd3f774995320c6eb729b01065fd86e210336b4022f3&#39;,</span>
+<span class="go"> u&#39;height&#39;: 787057,</span>
+<span class="go"> u&#39;mediantime&#39;: 1461096791,</span>
+<span class="go"> u&#39;merkleroot&#39;: u&#39;ba0393edef4e3eb899875df3f33332782203cad1da7ccb44ebcc9afb6c8ad755&#39;,</span>
+<span class="go"> u&#39;nextblockhash&#39;: u&#39;000000000003928b51f40754c294e39a6e4e32960ea7573f387eb1c9fe267932&#39;,</span>
+<span class="go"> u&#39;nonce&#39;: 1554583068,</span>
+<span class="go"> u&#39;previousblockhash&#39;: u&#39;00000000000002bf692db2544bd4dec305f3c7977c8fae9993929503ed881626&#39;,</span>
+<span class="go"> u&#39;size&#39;: 7705,</span>
+<span class="go"> u&#39;time&#39;: 1461099962,</span>
+<span class="go"> u&#39;tx&#39;: [u&#39;dd34715e37f7335b43ef7facfd8af6473c68cda9c7757067614de55536b487f8&#39;,</span>
+<span class="go">         u&#39;2a77690c8d6d4eb8c49653ce8052fdea903328c095289eb389b6aad760ce6fcd&#39;,</span>
+<span class="go">         u&#39;f7314541e97547529a11ad5f6404f389770205f6569226fa1e69dae1c48d078e&#39;,</span>
+<span class="go">         ...</span>
+<span class="go">         ]</span>
+<span class="go">u&#39;version&#39;: 4}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="merkle-root">
+<h2>Merkle Root<a class="headerlink" href="#merkle-root" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">get_block_raw</span><span class="p">(</span><span class="mi">787057</span><span class="p">)</span>
+<span class="go">{u&#39;hash&#39;: u&#39;00000000000003970a9fdd3f774995320c6eb729b01065fd86e210336b4022f3&#39;,</span>
+<span class="go"> u&#39;merkleroot&#39;: u&#39;ba0393edef4e3eb899875df3f33332782203cad1da7ccb44ebcc9afb6c8ad755&#39;,</span>
+<span class="go"> u&#39;tx&#39;: [u&#39;dd34715e37f7335b43ef7facfd8af6473c68cda9c7757067614de55536b487f8&#39;,</span>
+<span class="go">         u&#39;2a77690c8d6d4eb8c49653ce8052fdea903328c095289eb389b6aad760ce6fcd&#39;,</span>
+<span class="go">         u&#39;f7314541e97547529a11ad5f6404f389770205f6569226fa1e69dae1c48d078e&#39;,</span>
+<span class="go">         ...</span>
+<span class="go">         ]</span>
+<span class="go">u&#39;version&#39;: 4}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="merkle-tree-hash-tree">
+<h2>Merkle Tree (Hash Tree)<a class="headerlink" href="#merkle-tree-hash-tree" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id9">
+<img src="_images/hashtree_800.svg" /><p class="caption"><span class="caption-text"><a class="reference external" href="https://commons.wikimedia.org/wiki/File%3AHash_Tree.svg">Diagram of a binary hash tree</a>
+by <a class="reference external" href="https://commons.wikimedia.org/wiki/User:Azaghal">Azaghal</a>
+licensed under <a class="reference external" href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0 1.0</a></span></p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Merkle Tree (Hash Tree)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id10">
+<img alt="_images/Hashtreehashchainjux.png" src="_images/Hashtreehashchainjux.png" />
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/File:Hashtreehashchainjux.png">8 leaf node hash tree &amp; hash chain juxtaposition</a> by <a class="reference external" href="https://commons.wikimedia.org/w/index.php?title=User:Iryanb&amp;action=edit&amp;redlink=1">guardtime.com</a></span></p>
+<div class="legend">
+licensed under <a class="reference external" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a></div>
+</div>
+</div>
+<div class="section" id="computing-the-merkle-root">
+<h2>Computing the Merkle Root<a class="headerlink" href="#computing-the-merkle-root" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="k">def</span> <span class="nf">merkleroot</span><span class="p">(</span><span class="n">hashes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    hashes: reversed binary form of transactions hashes</span>
+<span class="sd">    returns: merkle root in hexadecimal form</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">binascii</span><span class="o">.</span><span class="n">hexlify</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">hashes</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">hashes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hashes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">parent_hashes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">first_round_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">hashes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">hashes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+        <span class="n">second_round_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">first_round_hash</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+        <span class="n">parent_hashes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_round_hash</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">merkleroot</span><span class="p">(</span><span class="n">parent_hashes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Computing the Merkle Root<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">block</span> <span class="o">=</span> <span class="n">transactions</span><span class="o">.</span><span class="n">get_block_raw</span><span class="p">(</span><span class="mi">787057</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">block</span><span class="p">[</span><span class="s1">&#39;merkleroot&#39;</span><span class="p">]</span>
+<span class="go">&#39;ba0393edef4e3eb899875df3f33332782203cad1da7ccb44ebcc9afb6c8ad755&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">h</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;tx&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merkleroot</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span>
+<span class="go">&#39;ba0393edef4e3eb899875df3f33332782203cad1da7ccb44ebcc9afb6c8ad755&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merkleroot</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span> <span class="o">==</span> <span class="n">block</span><span class="p">[</span><span class="s1">&#39;merkleroot&#39;</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bitcoin-blockchain">
+<h2>Bitcoin Blockchain<a class="headerlink" href="#bitcoin-blockchain" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transactions</span><span class="o">.</span><span class="n">get_block_raw</span><span class="p">(</span><span class="mi">787057</span><span class="p">)</span>
+<span class="go">{u&#39;hash&#39;: u&#39;00000000000003970a9fdd3f774995320c6eb729b01065fd86e210336b4022f3&#39;,</span>
+<span class="go"> u&#39;merkleroot&#39;: u&#39;ba0393edef4e3eb899875df3f33332782203cad1da7ccb44ebcc9afb6c8ad755&#39;,</span>
+<span class="go"> u&#39;nextblockhash&#39;: u&#39;000000000003928b51f40754c294e39a6e4e32960ea7573f387eb1c9fe267932&#39;,</span>
+<span class="go"> u&#39;nonce&#39;: 1554583068,</span>
+<span class="go"> u&#39;previousblockhash&#39;: u&#39;00000000000002bf692db2544bd4dec305f3c7977c8fae9993929503ed881626&#39;,</span>
+<span class="go"> ...</span>
+<span class="go"> }</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hash-chain">
+<h2>Hash Chain<a class="headerlink" href="#hash-chain" title="Permalink to this headline">¶</a></h2>
+<img src="_images/graphviz-b82051403660ddacca25d9cdfbb3b1587fe13364.png" alt="digraph R {
+    graph [
+        fontname = &quot;Helvetica-Oblique&quot;,
+        size = &quot;10!,10!&quot;,
+        rankdir=LR
+    ]
+    node [
+        style=&quot;rounded,filled&quot;,
+        fillcolor=&quot;green&quot;
+    ]
+    node1 [
+        shape=Mrecord,
+        label=&quot;hash(data-1) | data-1 | &lt;p1&gt; pointer&quot;,
+    ]
+    node2 [
+        shape=record,
+        label=&quot;&lt;h2&gt; hash(data-2) | &lt;d2&gt; data-2 | &lt;p2&gt; pointer&quot;
+    ]
+    node3 [
+        shape=record,
+        label=&quot;&lt;h3&gt; hash(data-3) | &lt;d3&gt; data-3 | signature&quot;
+    ]
+    node1:p1 -&gt; node2:h2
+    node2:p2 -&gt; node3:h3
+}" />
+</div>
+<div class="section" id="hash-tree-chain">
+<h2>Hash Tree Chain<a class="headerlink" href="#hash-tree-chain" title="Permalink to this headline">¶</a></h2>
+<img src="_images/graphviz-333042373d9ec111c32cd581a7f2b7879d155779.png" alt="digraph R {
+    graph [
+        fontname = &quot;Helvetica-Oblique&quot;,
+        size = &quot;10!,10!&quot;,
+        rankdir=LR
+    ]
+    node [
+        style=&quot;rounded,filled&quot;,
+        fillcolor=&quot;green&quot;
+    ]
+    node1 [
+        shape=record,
+        label=&quot;&lt;h1&gt; hash:0 | nonce | difficulty | &lt;d1&gt; merkleroot | &lt;n1&gt; nextblockhash:4 | previousblockhash&quot;,
+        fillcolor=&quot;yellow&quot;
+    ]
+    node2 [
+        shape=record,
+        label=&quot;&lt;h2&gt; hash:4 | nonce | difficulty | &lt;d2&gt; mekleroot | &lt;n2&gt; nextblockhash:2 | &lt;p2&gt; previousblockhash:0&quot;
+    ]
+    node3 [
+        shape=record,
+        label=&quot;&lt;h3&gt; hash:2 | nonce | difficulty | &lt;d3&gt; merkleroot | &lt;n3&gt; nextblockhash:7 | &lt;p3&gt; previousblockhash:4&quot;
+    ]
+    node4 [
+        shape=record,
+        label=&quot;&lt;h4&gt; hash:7 | nonce | difficulty | merkleroot | &lt;n4&gt; nextblockhash:6 | &lt;p4&gt; previousblockhash:2&quot;
+    ]
+    node1:n1 -&gt; node2:h2
+    node2:p2 -&gt; node1:h1
+    node2:n2 -&gt; node3:h3
+    node3:p3 -&gt; node2:h2
+    node3:n3 -&gt; node4:h4
+    node4:p4 -&gt; node3:h3
+}" />
+</div>
+<div class="section" id="genesis-block">
+<h2>Genesis Block<a class="headerlink" href="#genesis-block" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mainnet</span> <span class="o">=</span> <span class="n">Transactions</span><span class="p">()</span>
+
+<span class="n">mainnet</span><span class="o">.</span><span class="n">get_block_raw</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">u&#39;bits&#39;</span><span class="p">:</span> <span class="s1">u&#39;1d00ffff&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;chainwork&#39;</span><span class="p">:</span> <span class="s1">u&#39;0000000000000000000000000000000000000000000000000000000200020002&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;confirmations&#39;</span><span class="p">:</span> <span class="mi">408054</span><span class="p">,</span>
+ <span class="s1">u&#39;difficulty&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+ <span class="s1">u&#39;hash&#39;</span><span class="p">:</span> <span class="s1">u&#39;00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;height&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+ <span class="s1">u&#39;mediantime&#39;</span><span class="p">:</span> <span class="mi">1231469665</span><span class="p">,</span>
+ <span class="s1">u&#39;merkleroot&#39;</span><span class="p">:</span> <span class="s1">u&#39;0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;nextblockhash&#39;</span><span class="p">:</span> <span class="s1">u&#39;000000006a625f06636b8bb6ac7b960a8d03705d1ace08b1a19da3fdcc99ddbd&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;nonce&#39;</span><span class="p">:</span> <span class="mi">2573394689</span><span class="p">,</span>
+ <span class="s1">u&#39;previousblockhash&#39;</span><span class="p">:</span> <span class="s1">u&#39;000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f&#39;</span><span class="p">,</span>
+ <span class="s1">u&#39;size&#39;</span><span class="p">:</span> <span class="mi">215</span><span class="p">,</span>
+ <span class="s1">u&#39;time&#39;</span><span class="p">:</span> <span class="mi">1231469665</span><span class="p">,</span>
+ <span class="s1">u&#39;tx&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">u&#39;0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098&#39;</span><span class="p">],</span>
+ <span class="s1">u&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="double-spending-attack">
+<h2>Double Spending Attack<a class="headerlink" href="#double-spending-attack" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/double-spend.jpeg"><img alt="_images/double-spend.jpeg" src="_images/double-spend.jpeg" style="width: 645.12px; height: 483.84000000000003px;" /></a>
+</div>
+</div>
+<div class="section" id="bitcoin-network-consensus">
+<h2>Bitcoin Network &amp; Consensus<a class="headerlink" href="#bitcoin-network-consensus" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li>Peer-to-peer network</li>
+<li>Distributed consensus challenges</li>
+<li>Mining</li>
+<li>Hash puzzles</li>
+<li>Block rewards</li>
+<li>Transaction fees</li>
+</ul>
+</div>
+<div class="section" id="the-ascribe-stack">
+<h2>The ascribe stack<a class="headerlink" href="#the-ascribe-stack" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/ascribe-stack.jpg"><img alt="_images/ascribe-stack.jpg" class="align-center" src="_images/ascribe-stack.jpg" style="width: 720.0px; height: 540.0px;" /></a>
+</div>
+<div class="section" id="spring-time-decentralization-efforts">
+<h2>Spring Time: decentralization efforts<a class="headerlink" href="#spring-time-decentralization-efforts" title="Permalink to this headline">¶</a></h2>
+<ul class="build simple">
+<li><a class="reference external" href="https://github.com/bigchaindb/bigchaindb">bigchaindb</a>: The scalable blockchain database</li>
+<li><a class="reference external" href="https://erisindustries.com/">eris industries</a>:  The Smart Contract Application Platform</li>
+<li><a class="reference external" href="https://www.ethereum.org/">ethereum</a>: Blockchain App Platform</li>
+<li><a class="reference external" href="https://ipfs.io/">ipfs</a>: InterPlanetary File System</li>
+<li><a class="reference external" href="http://tendermint.com/">tendermint</a>: Consensus engine / TMSP (socket protocol)</li>
+<li>etc</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last">
+<li><p class="first">ethereum decentralized processing ?</p>
+</li>
+<li><p class="first">eris: smart contracts and orchestration of decentralized stacks ?</p>
+</li>
+<li><dl class="first docutils">
+<dt>tendermint: consensus engines ? Tendermint is a Byzantine Fault Tolerant consensus algorithm</dt>
+<dd><p class="first last">TMSP is a socket protocol enabling a blockchain consensus engine, running in one process, to manage a blockchain application state, running in another</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">bigchaindb: decentralized blockchain database</p>
+</li>
+<li><p class="first">ipfs: InterPlanetary file System</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="decentralized-stack">
+<h2>Decentralized Stack<a class="headerlink" href="#decentralized-stack" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/future-stack"><img alt="_images/future-stack" src="_images/future-stack" style="width: 879.0px; height: 542.25px;" /></a>
+</div>
+</div>
+<div class="section" id="bitcoin-addresses">
+<h2>Bitcoin Addresses<a class="headerlink" href="#bitcoin-addresses" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">ecdsa</span> <span class="kn">import</span> <span class="n">SigningKey</span><span class="p">,</span> <span class="n">SECP256k1</span>
+
+<span class="n">priv_key</span> <span class="o">=</span> <span class="s1">&#39;18E14A7B6A307F426A94F8114701E7C8E774E7F9A47E2C2035DB29A206321725&#39;</span>
+<span class="n">signing_key</span> <span class="o">=</span> <span class="n">SigningKey</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">priv_key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="n">curve</span><span class="o">=</span><span class="n">SECP256k1</span><span class="p">)</span>
+<span class="n">verifying_key</span> <span class="o">=</span> <span class="n">signing_key</span><span class="o">.</span><span class="n">verifying_key</span>
+<span class="n">pub_key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\04</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">verifying_key</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
+<span class="n">sha256_of_pubkey</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">pub_key</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">ripemd160</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;ripemd160&#39;</span><span class="p">)</span>
+<span class="n">ripemd160</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sha256_of_pubkey</span><span class="p">)</span>
+<span class="n">ripemd160_of_sha256_of_pubkey</span> <span class="o">=</span> <span class="n">ripemd160</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">versioned_ripemd160</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">ripemd160_of_sha256_of_pubkey</span>
+<span class="n">sha256_of_versioned_ripemd</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">versioned_ripemd160</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">sha256_of_sha256_of_ripemd</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">sha256_of_versioned_ripemd</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">checksum</span> <span class="o">=</span> <span class="n">sha256_of_sha256_of_ripemd</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">twenty_five_btc_addr</span> <span class="o">=</span> <span class="n">versioned_ripemd160</span> <span class="o">+</span> <span class="n">checksum</span>
+<span class="n">twenty_five_btc_addr</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">)</span>
+<span class="s1">&#39;00010966776006953d5567439e5e39f86a0d273beed61967f6&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-bitcoin-address-1">
+<h2>Creating a Bitcoin Address (1)<a class="headerlink" href="#creating-a-bitcoin-address-1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">ecdsa</span> <span class="kn">import</span> <span class="n">SigningKey</span><span class="p">,</span> <span class="n">SECP256k1</span>
+
+<span class="c1"># Generate a private ECDSA key (signing key)</span>
+<span class="n">priv_key</span> <span class="o">=</span> <span class="s1">&#39;18E14A7B6A307F426A94F8114701E7C8E774E7F9A47E2C2035DB29A206321725&#39;</span>
+<span class="n">signing_key</span> <span class="o">=</span> <span class="n">SigningKey</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">priv_key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">),</span> <span class="n">curve</span><span class="o">=</span><span class="n">SECP256k1</span><span class="p">)</span>
+
+<span class="c1"># Get the corressponding public (verifying) key</span>
+<span class="n">verifying_key</span> <span class="o">=</span> <span class="n">signing_key</span><span class="o">.</span><span class="n">verifying_key</span>
+
+<span class="c1"># prefix with 1 byte 9x04</span>
+<span class="n">pub_key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\04</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">verifying_key</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
+
+<span class="c1"># hash it using SHA-256</span>
+<span class="n">sha256_of_pubkey</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">pub_key</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-bitcoin-address-2">
+<h2>Creating a Bitcoin Address (2)<a class="headerlink" href="#creating-a-bitcoin-address-2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># perform a second round of hashing, using RIPEMD-160</span>
+<span class="n">ripemd160</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;ripemd160&#39;</span><span class="p">)</span>
+<span class="n">ripemd160</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sha256_of_pubkey</span><span class="p">)</span>
+<span class="n">ripemd160_of_sha256_of_pubkey</span> <span class="o">=</span> <span class="n">ripemd160</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+<span class="c1"># Prefix resulting with version byte (0x00 for mainnet)</span>
+<span class="n">versioned_ripemd160</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\00</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">ripemd160_of_sha256_of_pubkey</span>
+
+<span class="c1"># Perform two more round of hashing with SHA-256</span>
+<span class="n">sha256_of_versioned_ripemd</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">versioned_ripemd160</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">sha256_of_sha256_of_ripemd</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">sha256_of_versioned_ripemd</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+
+<span class="c1"># Address checksum: first 4 bytes of last hash</span>
+<span class="n">checksum</span> <span class="o">=</span> <span class="n">sha256_of_sha256_of_ripemd</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># 25-byte binary bitcoin address</span>
+<span class="n">twenty_five_btc_addr</span> <span class="o">=</span> <span class="n">versioned_ripemd160</span> <span class="o">+</span> <span class="n">checksum</span>
+<span class="n">twenty_five_btc_addr</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">)</span>
+<span class="s1">&#39;00010966776006953d5567439e5e39f86a0d273beed61967f6&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="build">
+<li><dl class="first docutils">
+<dt>Original paper:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://bitcoin.org/bitcoin.pdf">Bitcoin: A Peer-to-Peer Electronic Cash System</a> by Satoshi Nakamoto</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference external" href="https://bitcoin.org/en/developer-documentation">https://bitcoin.org/en/developer-documentation</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/bitcoinbook/bitcoinbook">Bitcoin book by Andreas M. Antonopoulos</a></p>
+</li>
+<li><dl class="first docutils">
+<dt>Coursera: <a class="reference external" href="https://www.coursera.org/course/bitcointech">https://www.coursera.org/course/bitcointech</a></dt>
+<dd><ul class="first last simple">
+<li>book: <a class="reference external" href="https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf">Bitcoin and Cryptocurrency Technologies</a> by <em>Narayan et al.</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>In depth:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Python libraries:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/richardkiss/pycoin">pycoin</a>, pybitcointools</li>
+<li><a class="reference external" href="https://github.com/ascribe/transactions">transactions</a></li>
+<li><a class="reference external" href="https://github.com/ascribe/pyspool">pyspool</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>Resources<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Bitcoin addresses:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses">https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses</a></li>
+<li><a class="reference external" href="http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html">http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Blockchain Explorers</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://blockr.io/">http://blockr.io/</a></li>
+<li><a class="reference external" href="https://blockchain.info/">https://blockchain.info/</a></li>
+<li><a class="reference external" href="https://blockexplorer.com/">https://blockexplorer.com/</a></li>
+<li><a class="reference external" href="https://www.blocktrail.com/BTC">https://www.blocktrail.com/BTC</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Bitcoin: Some Nuts &amp; Bolts</a><ul>
+<li><a class="reference internal" href="#thanks">Thanks</a></li>
+<li><a class="reference internal" href="#whoami"><code class="docutils literal"><span class="pre">whoami</span></code></a></li>
+<li><a class="reference internal" href="#a-few-words-about-ascribe">A few words about ascribe</a></li>
+<li><a class="reference internal" href="#ascribe-white-papers">ascribe &amp; white papers</a></li>
+<li><a class="reference internal" href="#ascribe-open-source-software">ascribe &amp; open source software</a></li>
+<li><a class="reference internal" href="#talk-outline">Talk Outline</a></li>
+<li><a class="reference internal" href="#warnings">Warnings</a></li>
+<li><a class="reference internal" href="#richard-feynman-the-feeling-of-confusion">Richard Feynman: the feeling of confusion</a></li>
+<li><a class="reference internal" href="#feynman-greek-vs-babylonian-mathematics">Feynman: &#8216;Greek&#8217; vs &#8216;Babylonian&#8217; mathematics</a></li>
+<li><a class="reference internal" href="#bitcoin-origins">Bitcoin Origins</a></li>
+<li><a class="reference internal" href="#bitcoin-key-points">Bitcoin Key Points</a></li>
+<li><a class="reference internal" href="#cryptographic-primitives">Cryptographic Primitives</a></li>
+<li><a class="reference internal" href="#secure-hash-algorithm-sha-256">Secure Hash Algorithm - SHA-256</a></li>
+<li><a class="reference internal" href="#daviesmeyer-one-way-compression-function">Davies–Meyer one-way compression function</a></li>
+<li><a class="reference internal" href="#elliptic-curve-digital-signature-algorithm-ecdsa">Elliptic Curve Digital Signature Algorithm (ECDSA)</a></li>
+<li><a class="reference internal" href="#alice-bob">Alice &amp; Bob</a></li>
+<li><a class="reference internal" href="#python-bitcoin">Python &amp; Bitcoin</a></li>
+<li><a class="reference internal" href="#alice-address-creation-with-pycoin">Alice: address creation with pycoin</a></li>
+<li><a class="reference internal" href="#alice-view-in-blockchain-explorer">Alice: view in blockchain explorer</a></li>
+<li><a class="reference internal" href="#bob-address-creation-with-pycoin">Bob: address creation with pycoin</a></li>
+<li><a class="reference internal" href="#bob-view-in-blockchain-explorer">Bob: view in blockchain explorer</a></li>
+<li><a class="reference internal" href="#alice-bob-view-balances">Alice &amp; Bob &#8211; view balances</a></li>
+<li><a class="reference internal" href="#alice-sends-10000-satoshis-to-bob">Alice sends 10000 satoshis to Bob</a></li>
+<li><a class="reference internal" href="#transaction-creation">Transaction Creation</a></li>
+<li><a class="reference internal" href="#transaction-signature">Transaction Signature</a></li>
+<li><a class="reference internal" href="#transaction-broadcast">Transaction Broadcast</a></li>
+<li><a class="reference internal" href="#decoded-signed-transaction">Decoded Signed Transaction</a></li>
+<li><a class="reference internal" href="#decoded-signed-tx-tx"><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']</span></code></a></li>
+<li><a class="reference internal" href="#decoded-signed-tx-tx-vin"><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']['vin']</span></code></a></li>
+<li><a class="reference internal" href="#decoded-signed-tx-tx-vout"><code class="docutils literal"><span class="pre">decoded_signed_tx['tx']['vout']</span></code></a></li>
+<li><a class="reference internal" href="#get-transaction">Get Transaction</a></li>
+<li><a class="reference internal" href="#bitcoin-block">Bitcoin Block</a></li>
+<li><a class="reference internal" href="#merkle-root">Merkle Root</a></li>
+<li><a class="reference internal" href="#merkle-tree-hash-tree">Merkle Tree (Hash Tree)</a></li>
+<li><a class="reference internal" href="#id1">Merkle Tree (Hash Tree)</a></li>
+<li><a class="reference internal" href="#computing-the-merkle-root">Computing the Merkle Root</a></li>
+<li><a class="reference internal" href="#id2">Computing the Merkle Root</a></li>
+<li><a class="reference internal" href="#bitcoin-blockchain">Bitcoin Blockchain</a></li>
+<li><a class="reference internal" href="#hash-chain">Hash Chain</a></li>
+<li><a class="reference internal" href="#hash-tree-chain">Hash Tree Chain</a></li>
+<li><a class="reference internal" href="#genesis-block">Genesis Block</a></li>
+<li><a class="reference internal" href="#double-spending-attack">Double Spending Attack</a></li>
+<li><a class="reference internal" href="#bitcoin-network-consensus">Bitcoin Network &amp; Consensus</a></li>
+<li><a class="reference internal" href="#the-ascribe-stack">The ascribe stack</a></li>
+<li><a class="reference internal" href="#spring-time-decentralization-efforts">Spring Time: decentralization efforts</a></li>
+<li><a class="reference internal" href="#decentralized-stack">Decentralized Stack</a></li>
+<li><a class="reference internal" href="#bitcoin-addresses">Bitcoin Addresses</a></li>
+<li><a class="reference internal" href="#creating-a-bitcoin-address-1">Creating a Bitcoin Address (1)</a></li>
+<li><a class="reference internal" href="#creating-a-bitcoin-address-2">Creating a Bitcoin Address (2)</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+<li><a class="reference internal" href="#id5">Resources</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Sylvain Bellemare.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

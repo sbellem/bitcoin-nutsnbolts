@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  docs:
+    build: .
+    volumes:
+      - .:/usr/src/
+  
+  html:
+    image: nginx
+    ports:
+      - '48080:80'
+    volumes:
+      - ./html:/usr/share/nginx/html
+  
+  slides:
+    image: nginx
+    ports:
+      - '58080:80'
+    volumes:
+      - ./slides:/usr/share/nginx/html
