@@ -161,10 +161,6 @@ URL: https://code.google.com/p/io-2012-slides
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Secure Public Online Ownership Ledger</p>
-</div>
 
 
 
@@ -231,7 +227,7 @@ in the context of a block.</p>
 <p>Brief discussion of the role of the nonce, and other related fields, with
 respect to the hash puzzle that needs to be solved.</p>
 <p>Briefly show how the blocks are chained, to form the block chain.</p>
-<p class="last">Bitcoin netowrk -- perhaps terminate with a brief mention of the challenge
+<p class="last">Bitcoin network -- perhaps terminate with a brief mention of the challenge
 of achieving consensus on what the block chain actually is since each node
 may have its own version.</p>
 </div>
@@ -283,7 +279,7 @@ may have its own version.</p>
       <ul class="build simple">
 <li>Satoshi Nakamoto paper: <a class="reference external" href="https://bitcoin.org/bitcoin.pdf">Bitcoin: A Peer-to-Peer Electronic Cash System</a></li>
 </ul>
-<div class="figure" id="id6">
+<div class="figure" id="id7">
 <img alt="_images/the_hunt_for_satoshi_nakamoto.png" src="_images/the_hunt_for_satoshi_nakamoto.png" />
 <p class="caption"><span class="caption-text"><a class="reference external" href="https://www.bitcoincomic.org/blog/hunt-for-satoshi-nakamoto-bitcoin-comic-gets-funded-available-soon/">The Hunt For Satoshi Nakamoto</a> by <a class="reference external" href="https://www.bitcoincomic.org/blog/author/alexpreukschat/">Alex Preukschat</a> (usage granted by the author)</span></p>
 </div>
@@ -406,9 +402,17 @@ inside a hash function.</p>
     <article class="">
       <ul>
 <li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">ecdsa</span></code>:</dt>
+<dd><ul class="first last simple">
+<li>Pure Python ECDSA signature/verification. -- <a class="reference external" href="https://github.com/warner">&#64;warner</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt><code class="docutils literal"><span class="pre">pycoin</span></code>:</dt>
 <dd><ul class="first last simple">
-<li>Bitcoin and alt-coin utility library. -- &#64;richardkiss</li>
+<li>Bitcoin and alt-coin utility library. -- <a class="reference external" href="https://github.com/richardkiss">&#64;richardkiss</a></li>
 </ul>
 </dd>
 </dl>
@@ -416,7 +420,7 @@ inside a hash function.</p>
 <li><dl class="first docutils">
 <dt><code class="docutils literal"><span class="pre">pybitcointools</span></code>:</dt>
 <dd><ul class="first last simple">
-<li>Common-sense Bitcoin-themed Python ECC library. -- &#64;vbuterin</li>
+<li>Common-sense Bitcoin-themed Python ECC library. -- <a class="reference external" href="https://github.com/vbuterin">&#64;vbuterin</a></li>
 </ul>
 </dd>
 </dl>
@@ -424,7 +428,7 @@ inside a hash function.</p>
 <li><dl class="first docutils">
 <dt><code class="docutils literal"><span class="pre">python-bitcoinlib</span></code>:</dt>
 <dd><ul class="first last simple">
-<li>Bitcoin library. -- &#64;petertodd</li>
+<li>Bitcoin library. -- <a class="reference external" href="https://github.com/petertodd">&#64;petertodd</a></li>
 </ul>
 </dd>
 </dl>
@@ -432,23 +436,16 @@ inside a hash function.</p>
 <li><dl class="first docutils">
 <dt><code class="docutils literal"><span class="pre">transactions</span></code>:</dt>
 <dd><ul class="first simple">
-<li>Library to easily create, sign, and push bitcoin transactions. -- &#64;ascribe</li>
+<li>Library to easily create, sign, and push bitcoin transactions. -- <a class="reference external" href="https://github.com/ascribe">&#64;ascribe</a></li>
 </ul>
 <p class="last">---</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">For this talk:</p>
-<blockquote>
-<div><ul>
-<li><div class="first highlight-bash"><div class="highlight"><pre><span></span>$ pip install pycoin transactions
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ pip install ecdsa pycoin transactions     <span class="c1"># for this talk</span>
 </pre></div>
 </div>
-</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
 
 
 
@@ -481,7 +478,7 @@ inside a hash function.</p>
       <h2>Alice: view in blockchain explorer</h2>
     </hgroup>
     <article class="">
-      <div class="figure" id="id7">
+      <div class="figure" id="id8">
 <img alt="_images/alice.png" src="_images/alice.png" />
 <p class="caption"><span class="caption-text">blocktrail.com/tBTC/address/mp2YPeFdPufm515qWbmPXzSACxnMVdphnF</span></p>
 </div>
@@ -515,7 +512,7 @@ inside a hash function.</p>
       <h2>Bob: view in blockchain explorer</h2>
     </hgroup>
     <article class="">
-      <div class="figure" id="id8">
+      <div class="figure" id="id9">
 <img alt="_images/bob.png" src="_images/bob.png" />
 <p class="caption"><span class="caption-text">blocktrail.com/tBTC/address/n4mgh5qiBXj7Y3tLu4fqcPf5KubRVmR9Lr</span></p>
 </div>
@@ -829,7 +826,7 @@ inside a hash function.</p>
       <h2>Merkle Tree (Hash Tree)</h2>
     </hgroup>
     <article class="">
-      <div class="figure" id="id9">
+      <div class="figure" id="id10">
 <img src="_images/hashtree_800.svg" /><p class="caption"><span class="caption-text"><a class="reference external" href="https://commons.wikimedia.org/wiki/File%3AHash_Tree.svg">Diagram of a binary hash tree</a>
 by <a class="reference external" href="https://commons.wikimedia.org/wiki/User:Azaghal">Azaghal</a>
 licensed under <a class="reference external" href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0 1.0</a></span></p>
@@ -839,12 +836,12 @@ licensed under <a class="reference external" href="https://creativecommons.org/p
 
 
     </article>
-  </slide>  <slide class="level-2" id="id1">
+  </slide>  <slide class="level-2" id="id2">
     <hgroup>
       <h2>Merkle Tree (Hash Tree)</h2>
     </hgroup>
     <article class="">
-      <div class="figure" id="id10">
+      <div class="figure" id="id11">
 <img alt="_images/Hashtreehashchainjux.png" src="_images/Hashtreehashchainjux.png" />
 <p class="caption"><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/File:Hashtreehashchainjux.png">8 leaf node hash tree &amp; hash chain juxtaposition</a> by <a class="reference external" href="https://commons.wikimedia.org/w/index.php?title=User:Iryanb&amp;action=edit&amp;redlink=1">guardtime.com</a></span></p>
 <div class="legend">
@@ -885,7 +882,7 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 
 
     </article>
-  </slide>  <slide class="level-2" id="id2">
+  </slide>  <slide class="level-2" id="id3">
     <hgroup>
       <h2>Computing the Merkle Root</h2>
     </hgroup>
@@ -1089,25 +1086,6 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 <li><a class="reference external" href="http://tendermint.com/">tendermint</a>: Consensus engine / TMSP (socket protocol)</li>
 <li>etc</li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last">
-<li><p class="first">ethereum decentralized processing ?</p>
-</li>
-<li><p class="first">eris: smart contracts and orchestration of decentralized stacks ?</p>
-</li>
-<li><dl class="first docutils">
-<dt>tendermint: consensus engines ? Tendermint is a Byzantine Fault Tolerant consensus algorithm</dt>
-<dd><p class="first last">TMSP is a socket protocol enabling a blockchain consensus engine, running in one process, to manage a blockchain application state, running in another</p>
-</dd>
-</dl>
-</li>
-<li><p class="first">bigchaindb: decentralized blockchain database</p>
-</li>
-<li><p class="first">ipfs: InterPlanetary file System</p>
-</li>
-</ul>
-</div>
 
 
 
@@ -1234,11 +1212,10 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>Python libraries:</dt>
+<dt>ascribe white papers:</dt>
 <dd><ul class="first last simple">
-<li><a class="reference external" href="https://github.com/richardkiss/pycoin">pycoin</a>, pybitcointools</li>
-<li><a class="reference external" href="https://github.com/ascribe/transactions">transactions</a></li>
-<li><a class="reference external" href="https://github.com/ascribe/pyspool">pyspool</a></li>
+<li><a class="reference external" href="https://d1qjsxua1o9x03.cloudfront.net/live/trent&#64;ascribe.io/ascribe%20whitepaper%2020150624/digitalwork/ascribe%20whitepaper%2020150624.pdf">Towards An Ownership Layer for the Internet</a></li>
+<li><a class="reference external" href="https://www.bigchaindb.com/whitepaper/">BigchainDB: A Scalable Blockchain Database</a></li>
 </ul>
 </dd>
 </dl>
@@ -1249,12 +1226,22 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 
 
     </article>
-  </slide>  <slide class="level-2" id="id5">
+  </slide>  <slide class="level-2" id="id6">
     <hgroup>
       <h2>Resources</h2>
     </hgroup>
     <article class="">
       <ul>
+<li><dl class="first docutils">
+<dt>Python libraries:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/warner/python-ecdsa">ecdsa</a></li>
+<li><a class="reference external" href="https://github.com/richardkiss/pycoin">pycoin</a>, <a class="reference external" href="https://github.com/vbuterin/pybitcointools">pybitcointools</a>, <a class="reference external" href="https://github.com/petertodd/python-bitcoinlib">python-bitcoinlib</a></li>
+<li><a class="reference external" href="https://github.com/ascribe/transactions">transactions</a>, <a class="reference external" href="https://github.com/ascribe/pyspool">pyspool</a></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><dl class="first docutils">
 <dt>Bitcoin addresses:</dt>
 <dd><ul class="first last simple">

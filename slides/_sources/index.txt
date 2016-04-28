@@ -52,8 +52,6 @@ A few words about ascribe
 |                                       |     :scale: 20 %                      |                             |
 +---------------------------------------+---------------------------------------+-----------------------------+
 
-.. note:: Secure Public Online Ownership Ledger
-
 
 ascribe & white papers
 =======================
@@ -116,7 +114,7 @@ Talk Outline
 
     Briefly show how the blocks are chained, to form the block chain.
 
-    Bitcoin netowrk -- perhaps terminate with a brief mention of the challenge
+    Bitcoin network -- perhaps terminate with a brief mention of the challenge
     of achieving consensus on what the block chain actually is since each node
     may have its own version.
 
@@ -240,25 +238,26 @@ Alice & Bob
 Python & Bitcoin
 ================
 
+* ``ecdsa``:
+    * Pure Python ECDSA signature/verification. -- `@warner <https://github.com/warner>`_
+
 * ``pycoin``:
-    * Bitcoin and alt-coin utility library. -- @richardkiss
+    * Bitcoin and alt-coin utility library. -- `@richardkiss <https://github.com/richardkiss>`_
 
 * ``pybitcointools``:
-    * Common-sense Bitcoin-themed Python ECC library. -- @vbuterin
+    * Common-sense Bitcoin-themed Python ECC library. -- `@vbuterin <https://github.com/vbuterin>`_
         
 * ``python-bitcoinlib``:
-    * Bitcoin library. -- @petertodd
+    * Bitcoin library. -- `@petertodd <https://github.com/petertodd>`_
 
 * ``transactions``:
-    * Library to easily create, sign, and push bitcoin transactions. -- @ascribe
+    * Library to easily create, sign, and push bitcoin transactions. -- `@ascribe <https://github.com/ascribe>`_
 
     ---
 
-* For this talk:
+.. code-block:: bash
 
-    * .. code-block:: bash
-
-          $ pip install pycoin transactions
+    $ pip install ecdsa pycoin transactions     # for this talk
 
         
 
@@ -774,15 +773,6 @@ Spring Time: decentralization efforts
 * `tendermint`_: Consensus engine / TMSP (socket protocol)
 * etc
 
-.. note::
-
-    * ethereum decentralized processing ?
-    * eris: smart contracts and orchestration of decentralized stacks ?
-    * tendermint: consensus engines ? Tendermint is a Byzantine Fault Tolerant consensus algorithm
-       TMSP is a socket protocol enabling a blockchain consensus engine, running in one process, to manage a blockchain application state, running in another
-    * bigchaindb: decentralized blockchain database
-    * ipfs: InterPlanetary file System
-
 
 Decentralized Stack
 ===================
@@ -858,24 +848,34 @@ Resources
 
 * Original paper:
     * `Bitcoin: A Peer-to-Peer Electronic Cash System <https://bitcoin.org/bitcoin.pdf>`_ by Satoshi Nakamoto
+
 * https://bitcoin.org/en/developer-documentation
+
 * `Bitcoin book by Andreas M. Antonopoulos <https://github.com/bitcoinbook/bitcoinbook>`_
+
 * Coursera: https://www.coursera.org/course/bitcointech
     * book: `Bitcoin and Cryptocurrency Technologies`_ by *Narayan et al.*
+
 * In depth:
     * `The Bitcoin Backbone Protocol: Analysis and Applications <https://eprint.iacr.org/2014/765.pdf>`_
-* Python libraries:
-    * `pycoin`_, pybitcointools
-    * `transactions`_
-    * `pyspool`_
+
+* ascribe white papers:
+    * `Towards An Ownership Layer for the Internet`_
+    * `BigchainDB: A Scalable Blockchain Database <https://www.bigchaindb.com/whitepaper/>`__
 
 
 Resources
 =========
 
+* Python libraries:
+    * `ecdsa`_
+    * `pycoin`_, `pybitcointools`_, `python-bitcoinlib`_
+    * `transactions`_, `pyspool`_
+
 * Bitcoin addresses:
     * https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses
     * http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html
+
 * Blockchain Explorers
     * http://blockr.io/
     * https://blockchain.info/
@@ -897,7 +897,7 @@ Resources
 .. _merkle tree: https://en.wikipedia.org/wiki/Merkle_tree
 .. _merkle trees: https://en.wikipedia.org/wiki/Merkle_tree
 .. _ralph merkle: https://en.wikipedia.org/wiki/Ralph_Merkle
-.. _ecdsa: https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+.. _ecdsa: https://github.com/warner/python-ecdsa
 .. _secp256k1: https://en.bitcoin.it/wiki/Secp256k1
 
 .. _SPOOL API: https://www.ascribe.io/docs/
@@ -914,5 +914,7 @@ Resources
 .. _image-match: https://github.com/ascribe/image-match
 
 .. _pycoin: https://github.com/richardkiss/pycoin
+.. _pybitcointools: https://github.com/vbuterin/pybitcointools
+.. _python-bitcoinlib: https://github.com/petertodd/python-bitcoinlib
 
 .. _CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/deed.en
