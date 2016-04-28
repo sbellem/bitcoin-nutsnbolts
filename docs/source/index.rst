@@ -841,8 +841,8 @@ Creating a Bitcoin Address (3)
 
 
 
-Resources
-=========
+Resources (1)
+=============
 
 .. rst-class:: build
 
@@ -864,8 +864,8 @@ Resources
     * `BigchainDB: A Scalable Blockchain Database <https://www.bigchaindb.com/whitepaper/>`__
 
 
-Resources
-=========
+Resources (2)
+=============
 
 * Python libraries:
     * `ecdsa`_
