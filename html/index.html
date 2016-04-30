@@ -187,14 +187,14 @@ may have its own version.</p>
 <li>Based on a public transaction ledger.</li>
 <li>The ledger is maintained by anonymous miners.</li>
 <li>Miners validate transactions, and generate blocks of transactions.</li>
-<li>For each block, miiners include a coin creation transaction, for
+<li>For each block, miners include a coin creation transaction, for
 which they select the recipient of the newly minted coins.</li>
 <li>A valid block must include a nonce.</li>
 <li>To find a valid nonce, a miner must brute-force a hash inequality.</li>
 <li>Bitcoin mining with the block rewards &amp; transaction fees create an incentive
-for miners to behave honestly, which in turn helps maintaining the intergity
-of the blockchain.</li>
-<li>Garay et al. <a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a>:</li>
+for miners to behave honestly, which in turn helps maintaining the integrity
+of the consensus chain aka &#8220;the&#8221; blockchain.</li>
+<li>Garay et al. <a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a></li>
 </ul>
 </div>
 <div class="section" id="cryptographic-primitives">
@@ -359,20 +359,30 @@ inside a hash function.</p>
 </div>
 <div class="section" id="alice-sends-10000-satoshis-to-bob">
 <h2>Alice sends 10000 satoshis to Bob<a class="headerlink" href="#alice-sends-10000-satoshis-to-bob" title="Permalink to this headline">¶</a></h2>
-<p class="build">Three steps by Alice:</p>
-<ul class="simple">
+<ul class="build">
+<li><dl class="first docutils">
+<dt>Three steps by Alice:</dt>
+<dd><ul class="first last simple">
 <li>Transaction creation</li>
 <li>Transaction signature</li>
 <li>Transaction broadcast</li>
 </ul>
-<p>Multiple steps required by the Bitcoin miners:</p>
-<ul class="simple">
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Multiple steps required by the Bitcoin miners:</dt>
+<dd><ul class="first last simple">
 <li>Transaction validation</li>
 <li>Transaction relay to connected peers</li>
 <li>Block generation (brute-foce hash inequality &amp; group valid transactions)</li>
 <li>Block broadcast</li>
 <li>Block validation</li>
 <li>Block chaining</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="transaction-creation">
@@ -822,7 +832,7 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 <li><dl class="first docutils">
 <dt>In depth:</dt>
 <dd><ul class="first last simple">
-<li><a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a></li>
+<li><a class="reference external" href="https://eprint.iacr.org/2014/765.pdf">The Bitcoin Backbone Protocol: Analysis and Applications</a> by Garay et al.</li>
 </ul>
 </dd>
 </dl>
@@ -830,8 +840,8 @@ licensed under <a class="reference external" href="https://creativecommons.org/l
 <li><dl class="first docutils">
 <dt>ascribe white papers:</dt>
 <dd><ul class="first last simple">
-<li><a class="reference external" href="https://d1qjsxua1o9x03.cloudfront.net/live/trent&#64;ascribe.io/ascribe%20whitepaper%2020150624/digitalwork/ascribe%20whitepaper%2020150624.pdf">Towards An Ownership Layer for the Internet</a></li>
-<li><a class="reference external" href="https://www.bigchaindb.com/whitepaper/">BigchainDB: A Scalable Blockchain Database</a></li>
+<li><a class="reference external" href="https://d1qjsxua1o9x03.cloudfront.net/live/trent&#64;ascribe.io/ascribe%20whitepaper%2020150624/digitalwork/ascribe%20whitepaper%2020150624.pdf">Towards An Ownership Layer for the Internet</a> by McConaghy &amp; Holtzman</li>
+<li><a class="reference external" href="https://www.bigchaindb.com/whitepaper/">BigchainDB: A Scalable Blockchain Database</a> by McConaghy et al.</li>
 </ul>
 </dd>
 </dl>

@@ -166,15 +166,15 @@ Bitcoin Key Points
 * Based on a public transaction ledger.
 * The ledger is maintained by anonymous miners.
 * Miners validate transactions, and generate blocks of transactions.
-* For each block, miiners include a coin creation transaction, for
+* For each block, miners include a coin creation transaction, for
   which they select the recipient of the newly minted coins.
 * A valid block must include a nonce.
 * To find a valid nonce, a miner must brute-force a hash inequality.
 * Bitcoin mining with the block rewards & transaction fees create an incentive
-  for miners to behave honestly, which in turn helps maintaining the intergity
-  of the blockchain.
+  for miners to behave honestly, which in turn helps maintaining the integrity
+  of the consensus chain aka "the" blockchain.
     
-* Garay et al. `The Bitcoin Backbone Protocol: Analysis and Applications <https://eprint.iacr.org/2014/765.pdf>`_:
+* Garay et al. `The Bitcoin Backbone Protocol: Analysis and Applications <https://eprint.iacr.org/2014/765.pdf>`_
 
     
 
@@ -339,20 +339,18 @@ Alice sends 10000 satoshis to Bob
 
 .. rst-class:: build
 
-Three steps by Alice:
+* Three steps by Alice:
+    * Transaction creation
+    * Transaction signature
+    * Transaction broadcast
 
-* Transaction creation
-* Transaction signature
-* Transaction broadcast
-
-Multiple steps required by the Bitcoin miners:
-
-* Transaction validation
-* Transaction relay to connected peers
-* Block generation (brute-foce hash inequality & group valid transactions)
-* Block broadcast
-* Block validation
-* Block chaining
+* Multiple steps required by the Bitcoin miners:
+    * Transaction validation
+    * Transaction relay to connected peers
+    * Block generation (brute-foce hash inequality & group valid transactions)
+    * Block broadcast
+    * Block validation
+    * Block chaining
 
 
 Transaction Creation
@@ -857,11 +855,11 @@ Resources (1)
     * book: `Bitcoin and Cryptocurrency Technologies`_ by *Narayan et al.*
 
 * In depth:
-    * `The Bitcoin Backbone Protocol: Analysis and Applications <https://eprint.iacr.org/2014/765.pdf>`_
+    * `The Bitcoin Backbone Protocol: Analysis and Applications <https://eprint.iacr.org/2014/765.pdf>`_ by Garay et al. 
 
 * ascribe white papers:
-    * `Towards An Ownership Layer for the Internet`_
-    * `BigchainDB: A Scalable Blockchain Database <https://www.bigchaindb.com/whitepaper/>`__
+    * `Towards An Ownership Layer for the Internet`_ by McConaghy & Holtzman
+    * `BigchainDB: A Scalable Blockchain Database <https://www.bigchaindb.com/whitepaper/>`_ by McConaghy et al. 
 
 
 Resources (2)
