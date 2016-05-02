@@ -559,7 +559,7 @@ Merkle Root
 Merkle Tree (Hash Tree)
 =======================
 
-.. figure:: /_static/hashtree_800.svg
+.. figure:: /_static/hashtree.png
 
     `Diagram of a binary hash tree <https://commons.wikimedia.org/wiki/File%3AHash_Tree.svg>`_
     by `Azaghal <https://commons.wikimedia.org/wiki/User:Azaghal>`_
