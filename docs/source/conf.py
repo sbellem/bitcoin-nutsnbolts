@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sphinx_rtd_theme
+
 
 extensions = [
     'sphinx.ext.doctest',
@@ -31,7 +33,8 @@ pygments_style = 'sphinx'
 
 todo_include_todos = True
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_static_path = ['_static']
 htmlhelp_basename = 'BitcoinNutsAndBoltsdoc'
 

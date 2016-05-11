@@ -8,7 +8,7 @@ RUN apt-get install -y context
 RUN apt-get install -y graphviz
 
 RUN pip install --upgrade pip
-RUN pip install sphinx hieroglyph
+RUN pip install hieroglyph sphinx sphinx_rtd_theme
 
 VOLUME /usr/src/
 WORKDIR /usr/src/
