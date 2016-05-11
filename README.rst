@@ -5,11 +5,11 @@ them.
 
 Slides can be viewed at
 
-* https://ascribe.github.io/bitcoin-nutsnbolts/slides/#1
+* https://sbellem.github.io/bitcoin-nutsnbolts/slides/
 
 and the html version at
 
-* https://ascribe.github.io/bitcoin-nutsnbolts/html/
+* https://sbellem.github.io/bitcoin-nutsnbolts/html/
 
 
 Building and viewing locally

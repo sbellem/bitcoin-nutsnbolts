@@ -21,6 +21,6 @@ var SLIDE_CONFIG = {
   },
 
   // Author information
-  presenters: [{"twitter": "@sbellem", "www": "ascribe.io", "github": "sbellem", "name": "Sylvain Bellemare", "email": "sylvain@ascribe.io"}]
+  presenters: [{"www": "ascribe.io", "email": "sylvain@ascribe.io", "name": "Sylvain Bellemare", "twitter": "@sbellem", "github": "sbellem"}]
   
 };

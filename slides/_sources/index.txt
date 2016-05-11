@@ -138,12 +138,14 @@ Richard Feynman: the feeling of confusion
 
     <iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/lytxafTXg6c?rel=0" frameborder="0" allowfullscreen></iframe>
 
-Feynman: 'Greek' vs 'Babylonian' mathematics
+Feynman: "Greek" vs "Babylonian" Mathematics
 ============================================
 
 .. raw:: html
 
-    <iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/YaUlqXRPMmY?rel=0" frameborder="0" allowfullscreen></iframe>
+    <iframe src='//www.cornell.edu/video/richard-feynman-messenger-lecture-2-relation-mathematics-physics/embed' width='560' height='315' frameborder='0' allowfullscreen></iframe>
+
+.. note:: The core of the discussion of each approach starts a few seconds after ~23:25.
 
 
 Bitcoin Origins
@@ -842,8 +844,6 @@ Creating a Bitcoin Address (3)
 Resources (1)
 =============
 
-.. rst-class:: build
-
 * Original paper:
     * `Bitcoin: A Peer-to-Peer Electronic Cash System <https://bitcoin.org/bitcoin.pdf>`_ by Satoshi Nakamoto
 
@@ -879,6 +879,13 @@ Resources (2)
     * https://blockchain.info/
     * https://blockexplorer.com/
     * https://www.blocktrail.com/BTC
+
+
+Resources (3)
+=============
+
+* Richard Feynman -- Messenger Lectures (1964)
+    * `The Relation of Mathematics to Physics | The Character of Physical Law <http://www.cornell.edu/video/richard-feynman-messenger-lecture-2-relation-mathematics-physics>`_
 
 
 .. _Bitcoin and Cryptocurrency Technologies: https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf
